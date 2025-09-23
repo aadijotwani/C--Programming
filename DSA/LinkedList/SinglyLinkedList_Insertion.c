@@ -10,6 +10,7 @@ struct node
 void NodeCount(struct node **head);
 void Insert_at_Beginning(struct node **head);
 void Insert_at_End(struct node **head);
+void Insert_at_Position(struct node **head);
 
 
 int main()
@@ -44,7 +45,7 @@ int main()
     while (1)
     {
 
-        printf("Please enter a choice: \n 1.Display the Node: \n 2.Count the Number of Nodes: \n 3.Insert at the Begninning: \n 4.Insert at the End: ");
+        printf("Please enter a choice: \n 1.Display the Node: \n 2.Count the Number of Nodes: \n 3.Insert at the Begninning: \n 4.Insert at the End: \n 5.Insert at the Position: \n");
         scanf("%d", &choice);
 
         switch (choice)
@@ -72,8 +73,13 @@ int main()
             Insert_at_End(&head);
             break;
             
-
+        
         case 5:
+            Insert_at_Position(&head);
+            break;
+
+
+        case 6:
             return 0;
         }
     }
@@ -123,5 +129,26 @@ void Insert_at_End(struct node **head){
         temp = temp -> next;
     }
     temp->next = newNode;
+}
 
+void Insert_at_Position(struct node **head){
+     
+    struct node *newNode, *temp;
+    newNode = (struct node*)malloc(sizeof(struct node));
+    
+    int pos, i=2;
+    printf("Please enter the position to add the node: ");
+    scanf("%d", &pos);
+
+    printf("Enter the Data: ");
+    scanf("%d", &newNode->data);
+
+
+    temp = *head;
+    while(i<pos){
+        temp = temp -> next;
+        i++;
+    }
+    newNode->next = temp->next;
+    temp->next = newNode;
 }
